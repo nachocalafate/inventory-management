@@ -1,0 +1,39 @@
+package com.calafate.inventory_management.model;
+
+import jakarta.persistence.*;
+        import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.math.BigDecimal;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String code;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private List<Stock> stocks;
+
+    @OneToMany(mappedBy = "product")
+    private List<PurchaseDetail> purchaseDetails;
+
+    @OneToMany(mappedBy = "product")
+    private List<SaleDetail> saleDetails;
+}
