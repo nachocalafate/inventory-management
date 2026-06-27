@@ -1,4 +1,4 @@
-Inventory Management System
+**Inventory Management System**
 
 Este proyecto es una aplicación de backend robusta desarrollada en Java utilizando el framework Spring Boot y PostgreSQL como motor de base de datos relacional. 
 
@@ -6,13 +6,13 @@ El objetivo principal es ofrecer una API eficiente para el control de stock, pro
 
 ---
 
-Tecnologías y Herramientas
+**Tecnologías y Herramientas**
 
-* Lenguaje: Java 25
-* Framework Principal: Spring Boot (Data JPA, Web)
-* Base de Datos: PostgreSQL
-* Gestor de Dependencias: Maven
-* Control de Versiones: Git & GitHub
+**Lenguaje:** Java 25
+**Framework Principal:** Spring Boot (Data JPA, Web)
+**Base de Datos:** PostgreSQL
+**Gestor de Dependencias:** Maven
+**Control de Versiones:** Git & GitHub
 
 ---
 
@@ -27,11 +27,17 @@ El proyecto está estructurado siguiendo una arquitectura en capas para garantiz
 
 ---
 
-Estado Actual del Proyecto
+**Estado Actual del Proyecto**
 
-El puente de comunicación y el repositorio base en GitHub ya están completamente configurados y sincronizados mediante Git. 
+El puente de comunicación y el repositorio base en GitHub ya están completamente configurados y sincronizados mediante Git. Actualmente, el proyecto ha superado su configuración inicial y se encuentra en pleno desarrollo de la capa de datos y transferencia.
 
-Actualmente, el proyecto se encuentra en la fase inicial de desarrollo, enfocada en:
-1. El modelado de las entidades de la base de datos en PostgreSQL.
-2. La configuración de las propiedades de conexión de la app (`application.properties`).
-3. La creación de la estructura limpia de paquetes en el entorno local.
+**Avances completados:**
+- [x] **Configuración Base:** Estructura limpia de paquetes generada en el entorno local.
+- [x] **Propiedades del Sistema:** Configuración completa de las propiedades de conexión a la base de datos PostgreSQL (`application.properties`).
+- [x] **Modelo de Datos:** Modelado y actualización de las entidades principales en Java (como `Product.java`).
+- [x] **Capa de Transferencia (DTOs):** Creación e implementación de todos los Data Transfer Objects (DTOs) de las clases del sistema para desacoplar la base de datos de la vista.
+
+**Próximos Pasos en Desarrollo:**
+- [ ] Implementación de los componentes de mapeo (`mappers`) para la conversión Entidad-DTO.
+- [ ] Configuración de la capa de persistencia mediante repositorios de Spring Data JPA (`repository`).
+- [ ] Construcción de la lógica de negocio en la capa de servicios (`service`).
