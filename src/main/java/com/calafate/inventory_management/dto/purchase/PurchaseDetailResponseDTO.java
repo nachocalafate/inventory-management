@@ -10,5 +10,6 @@ public class PurchaseDetailResponseDTO {
     private String productName;
     private String productCode;
     private Integer quantity;
+    private BigDecimal unitPrice;
     private BigDecimal subtotal;
 }
