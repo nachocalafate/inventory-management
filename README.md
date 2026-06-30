@@ -28,20 +28,22 @@ El proyecto está estructurado siguiendo una arquitectura en capas para garantiz
 ---
 
 **Estado Actual del Proyecto**
-### Estado Actual del Proyecto 🚀
 
-El backend del sistema se encuentra completamente estructurado y con su arquitectura base finalizada. La API cuenta con todas sus capas de desarrollo configuradas, comunicadas y sincronizadas con el repositorio en GitHub.
+El backend del sistema se encuentra completamente estructurado, funcional y probado de punta a punta. La API cuenta con todas sus capas de desarrollo configuradas, comunicadas y sincronizadas con el repositorio en GitHub, incluyendo manejo de errores y validaciones robustas.
 
-**Avances e Hitos Completados:**
-- [x] **Configuración Base:** Estructura limpia de paquetes y propiedades de conexión a PostgreSQL (`application.properties`).
-- [x] **Modelo de Datos:** Entidades principales modeladas en Java mediante JPA/Hibernate.
-- [x] **Capa de Transferencia (DTOs):** Creación e implementación de los Data Transfer Objects para desacoplar las entidades.
-- [x] **Mapeo de Datos:** Configuración de componentes `mappers` para la conversión limpia entre Entidades y DTOs.
-- [x] **Capa de Persistencia (Repositories):** Implementación de interfaces que heredan de Spring Data JPA para el acceso a datos.
-- [x] **Lógica de Negocio (Services):** Construcción de los servicios que manejan las reglas del negocio del sistema.
-- [x] **Capa de Exposición (Controllers):** Creación de los controladores REST para exponer los endpoints de la API.
-- [x] **Test:** Pruebas y validación de endpoints utilizando dependencia Swagger UI.
+**Avances completados:**
 
-**Próximos Pasos en Desarrollo:**
-- [ ] Implementación de validaciones personalizadas en los DTOs (`@Valid`, `@NotNull`, etc.).
-- [ ] Manejo global de excepciones (`@ControllerAdvice`) para respuestas limpias ante errores.
+* Configuración Base: Estructura limpia de paquetes y propiedades de conexión a PostgreSQL (`application.properties`).
+* Modelo de Datos: Entidades principales modeladas en Java mediante JPA/Hibernate.
+* Capa de Transferencia (DTOs): Creación e implementación de los Data Transfer Objects para desacoplar las entidades.
+* Mapeo de Datos: Configuración de componentes `mappers` para la conversión limpia entre Entidades y DTOs.
+* Capa de Persistencia (Repositories): Implementación de interfaces que heredan de Spring Data JPA para el acceso a datos.
+* Lógica de Negocio (Services): Construcción de los servicios que manejan las reglas del negocio del sistema, incluyendo control de stock automático en compras y ventas.
+* Capa de Exposición (Controllers): Creación de los controladores REST para exponer los endpoints de la API.
+* Manejo Global de Excepciones: Implementación de `@RestControllerAdvice` para capturar errores de forma centralizada y devolver respuestas HTTP limpias y consistentes (404, 400, 500).
+* Validaciones: Incorporación de Bean Validation (`@NotBlank`, `@NotNull`, `@Positive`, `@Email`) en los DTOs de entrada, con manejo automático de errores de validación.
+* Test: Pruebas y validación de endpoints utilizando dependencia Swagger UI (springdoc-openapi).
+
+**Próximos pasos en desarrollo:**
+
+* Autenticación y autorización de usuarios con Spring Security y JWT.
