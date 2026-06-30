@@ -2,6 +2,7 @@ package com.calafate.inventory_management.service.imp;
 
 import com.calafate.inventory_management.dto.product.ProductRequestDTO;
 import com.calafate.inventory_management.dto.product.ProductResponseDTO;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.ProductMapper;
 import com.calafate.inventory_management.model.Product;
 import com.calafate.inventory_management.repository.IProductRepository;
@@ -29,7 +30,7 @@ public class ProductServiceImp implements IProductService {
     @Override
     public ProductResponseDTO getById(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         return productMapper.toResponseDTO(product);
     }
 
@@ -44,7 +45,7 @@ public class ProductServiceImp implements IProductService {
     @Override
     public ProductResponseDTO update(Long id, ProductRequestDTO request) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         product.setCode(request.getCode());
         product.setName(request.getName());
         product.setDescription(request.getDescription());
@@ -56,14 +57,14 @@ public class ProductServiceImp implements IProductService {
     @Override
     public void delete(Long id) {
         productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         productRepository.deleteById(id);
     }
 
     @Override
     public ProductResponseDTO deactivate(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         product.setActive(false);
         productRepository.save(product);
         return productMapper.toResponseDTO(product);
@@ -80,7 +81,7 @@ public class ProductServiceImp implements IProductService {
     @Override
     public ProductResponseDTO getByCode(String code) {
         Product product = productRepository.findByCode(code)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         return productMapper.toResponseDTO(product);
     }
 }

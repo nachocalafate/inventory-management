@@ -2,6 +2,7 @@ package com.calafate.inventory_management.service.imp;
 
 import com.calafate.inventory_management.dto.category.CategoryRequestDTO;
 import com.calafate.inventory_management.dto.category.CategoryResponseDTO;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.CategoryMapper;
 import com.calafate.inventory_management.model.Category;
 import com.calafate.inventory_management.repository.ICategoryRepository;
@@ -29,7 +30,7 @@ public class CategoryServiceImp implements ICategoryService {
     @Override
     public CategoryResponseDTO getById(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
         return categoryMapper.toResponseDTO(category);
     }
 
@@ -44,7 +45,7 @@ public class CategoryServiceImp implements ICategoryService {
     @Override
     public CategoryResponseDTO update(Long id, CategoryRequestDTO request) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
         category.setName(request.getName());
         category.setDescription(request.getDescription());
         categoryRepository.save(category);
@@ -54,7 +55,7 @@ public class CategoryServiceImp implements ICategoryService {
     @Override
     public void delete(Long id) {
         categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
         categoryRepository.deleteById(id);
     }
 }

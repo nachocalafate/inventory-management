@@ -3,6 +3,7 @@ package com.calafate.inventory_management.controller;
 import com.calafate.inventory_management.dto.supplier.SupplierRequestDTO;
 import com.calafate.inventory_management.dto.supplier.SupplierResponseDTO;
 import com.calafate.inventory_management.service.ISupplierService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class SupplierController {
     private final ISupplierService supplierService;
 
     @PostMapping
-    public ResponseEntity<SupplierResponseDTO> create(@RequestBody SupplierRequestDTO request) {
+    public ResponseEntity<SupplierResponseDTO> create(@Valid @RequestBody SupplierRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(supplierService.create(request));
     }
 
@@ -33,7 +34,7 @@ public class SupplierController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id, @RequestBody SupplierRequestDTO request) {
+    public ResponseEntity<SupplierResponseDTO> update(@PathVariable Long id,@Valid @RequestBody SupplierRequestDTO request) {
         return ResponseEntity.ok(supplierService.update(id, request));
     }
 

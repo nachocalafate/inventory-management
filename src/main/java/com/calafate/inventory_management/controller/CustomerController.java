@@ -3,6 +3,7 @@ package com.calafate.inventory_management.controller;
 import com.calafate.inventory_management.dto.customer.CustomerRequestDTO;
 import com.calafate.inventory_management.dto.customer.CustomerResponseDTO;
 import com.calafate.inventory_management.service.ICustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CustomerController {
     private final ICustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<CustomerResponseDTO> create(@RequestBody CustomerRequestDTO request) {
+    public ResponseEntity<CustomerResponseDTO> create(@Valid @RequestBody CustomerRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(request));
     }
 
@@ -33,7 +34,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponseDTO> update(@PathVariable Long id, @RequestBody CustomerRequestDTO request) {
+    public ResponseEntity<CustomerResponseDTO> update(@PathVariable Long id,@Valid @RequestBody CustomerRequestDTO request) {
         return ResponseEntity.ok(customerService.update(id, request));
     }
 

@@ -3,6 +3,7 @@ package com.calafate.inventory_management.controller;
 import com.calafate.inventory_management.dto.branch.BranchRequestDTO;
 import com.calafate.inventory_management.dto.branch.BranchResponseDTO;
 import com.calafate.inventory_management.service.IBranchService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class BranchController {
     }
 
     @PostMapping
-    public ResponseEntity<BranchResponseDTO> create(@RequestBody BranchRequestDTO request) {
+    public ResponseEntity<BranchResponseDTO> create(@Valid @RequestBody BranchRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(branchService.create(request));
     }
 
@@ -33,7 +34,7 @@ public class BranchController {
         return ResponseEntity.ok(branchService.getById(id));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<BranchResponseDTO> update(@PathVariable Long id,@RequestBody BranchRequestDTO request){
+    public ResponseEntity<BranchResponseDTO> update(@PathVariable Long id,@Valid @RequestBody BranchRequestDTO request){
         return ResponseEntity.ok(branchService.update(id,request));
     }
     @DeleteMapping("/{id}")

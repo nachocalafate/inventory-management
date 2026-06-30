@@ -3,6 +3,7 @@ package com.calafate.inventory_management.controller;
 import com.calafate.inventory_management.dto.sale.SaleRequestDTO;
 import com.calafate.inventory_management.dto.sale.SaleResponseDTO;
 import com.calafate.inventory_management.service.ISaleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class SaleController {
     private final ISaleService saleService;
 
     @PostMapping
-    public ResponseEntity<SaleResponseDTO> create(@RequestBody SaleRequestDTO request) {
+    public ResponseEntity<SaleResponseDTO> create(@Valid @RequestBody SaleRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(saleService.create(request));
     }
 

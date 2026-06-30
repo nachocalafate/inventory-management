@@ -2,6 +2,7 @@ package com.calafate.inventory_management.service.imp;
 
 import com.calafate.inventory_management.dto.supplier.SupplierRequestDTO;
 import com.calafate.inventory_management.dto.supplier.SupplierResponseDTO;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.SupplierMapper;
 import com.calafate.inventory_management.model.Supplier;
 import com.calafate.inventory_management.repository.ISupplierRepository;
@@ -29,7 +30,7 @@ public class SupplierServiceImp implements ISupplierService {
     @Override
     public SupplierResponseDTO getById(Long id) {
         Supplier supplier = supplierRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Supplier not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
         return supplierMapper.toResponseDTO(supplier);
     }
 
@@ -44,7 +45,7 @@ public class SupplierServiceImp implements ISupplierService {
     @Override
     public SupplierResponseDTO update(Long id, SupplierRequestDTO request) {
         Supplier supplier = supplierRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Supplier not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
         supplier.setName(request.getName());
         supplier.setPhone(request.getPhone());
         supplier.setEmail(request.getEmail());
@@ -56,7 +57,7 @@ public class SupplierServiceImp implements ISupplierService {
     @Override
     public void delete(Long id) {
         supplierRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Supplier not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
         supplierRepository.deleteById(id);
     }
 }

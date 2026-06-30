@@ -3,23 +3,21 @@ package com.calafate.inventory_management.service.imp;
 import com.calafate.inventory_management.dto.purchase.PurchaseDetailRequestDTO;
 import com.calafate.inventory_management.dto.purchase.PurchaseRequestDTO;
 import com.calafate.inventory_management.dto.purchase.PurchaseResponseDTO;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.PurchaseMapper;
 import com.calafate.inventory_management.mapper.StockMapper;
 import com.calafate.inventory_management.model.Purchase;
 import com.calafate.inventory_management.model.Stock;
-import com.calafate.inventory_management.repository.IBranchRepository;
-import com.calafate.inventory_management.repository.IProductRepository;
 import com.calafate.inventory_management.repository.IPurchaseRepository;
 import com.calafate.inventory_management.repository.IStockRepository;
 import com.calafate.inventory_management.service.IPurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-// PurchaseServiceImpl.java
+
 @Service
 @RequiredArgsConstructor
 public class PurchaseServiceImp implements IPurchaseService {
@@ -72,7 +70,7 @@ public class PurchaseServiceImp implements IPurchaseService {
     @Override
     public PurchaseResponseDTO getById(Long id) {
         Purchase purchase = purchaseRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Purchase not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Purchase not found"));
         return purchaseMapper.toResponseDTO(purchase);
     }
 

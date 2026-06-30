@@ -2,6 +2,7 @@ package com.calafate.inventory_management.service.imp;
 
 import com.calafate.inventory_management.dto.customer.CustomerRequestDTO;
 import com.calafate.inventory_management.dto.customer.CustomerResponseDTO;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.CustomerMapper;
 import com.calafate.inventory_management.model.Customer;
 import com.calafate.inventory_management.repository.ICustomerRepository;
@@ -29,7 +30,7 @@ public class CustomerServiceImp implements ICustomerService {
     @Override
     public CustomerResponseDTO getById(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
         return customerMapper.toResponseDTO(customer);
     }
 
@@ -58,14 +59,14 @@ public class CustomerServiceImp implements ICustomerService {
     @Override
     public void delete(Long id) {
         customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
         customerRepository.deleteById(id);
     }
 
     @Override
     public CustomerResponseDTO deactivate(Long id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
         customer.setActive(false);
         customerRepository.save(customer);
         return customerMapper.toResponseDTO(customer);
@@ -74,7 +75,7 @@ public class CustomerServiceImp implements ICustomerService {
     @Override
     public CustomerResponseDTO getByDni(String dni) {
         Customer customer = customerRepository.findByDni(dni)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
         return customerMapper.toResponseDTO(customer);
     }
 }

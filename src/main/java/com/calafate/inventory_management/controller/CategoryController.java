@@ -4,9 +4,9 @@ package com.calafate.inventory_management.controller;
 import com.calafate.inventory_management.dto.category.CategoryRequestDTO;
 import com.calafate.inventory_management.dto.category.CategoryResponseDTO;
 import com.calafate.inventory_management.service.ICategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class CategoryController {
     private final ICategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryResponseDTO> create(@RequestBody CategoryRequestDTO request){
+    public ResponseEntity<CategoryResponseDTO> create(@Valid @RequestBody CategoryRequestDTO request){
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.create(request));
     }
 
@@ -35,7 +35,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponseDTO> update(@PathVariable Long id,@RequestBody CategoryRequestDTO request){
+    public ResponseEntity<CategoryResponseDTO> update(@PathVariable Long id,@Valid @RequestBody CategoryRequestDTO request){
         return ResponseEntity.ok(categoryService.update(id,request));
     }
 

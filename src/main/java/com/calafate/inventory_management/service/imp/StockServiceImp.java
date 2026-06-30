@@ -2,6 +2,7 @@ package com.calafate.inventory_management.service.imp;
 
 
 import com.calafate.inventory_management.dto.stock.StockResponseDTO;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.StockMapper;
 import com.calafate.inventory_management.model.Stock;
 import com.calafate.inventory_management.repository.IStockRepository;
@@ -21,7 +22,7 @@ public class StockServiceImp implements IStockService {
     @Override
     public StockResponseDTO getById(Long id) {
         Stock stock = stockRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Stock not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Stock not found"));
         return stockMapper.toResponseDTO(stock);
     }
 

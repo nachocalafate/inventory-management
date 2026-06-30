@@ -3,6 +3,8 @@ package com.calafate.inventory_management.service.imp;
 import com.calafate.inventory_management.dto.sale.SaleDetailRequestDTO;
 import com.calafate.inventory_management.dto.sale.SaleRequestDTO;
 import com.calafate.inventory_management.dto.sale.SaleResponseDTO;
+import com.calafate.inventory_management.exception.InsufficientStockException;
+import com.calafate.inventory_management.exception.ResourceNotFoundException;
 import com.calafate.inventory_management.mapper.SaleMapper;
 import com.calafate.inventory_management.model.Sale;
 import com.calafate.inventory_management.model.Stock;
@@ -30,11 +32,11 @@ public class SaleServiceImp implements ISaleService {
         for (SaleDetailRequestDTO detail : request.getDetails()) {
             Stock stock = stockRepository
                     .findByProductIdAndBranchId(detail.getProductId(), request.getBranchId())
-                    .orElseThrow(() -> new RuntimeException("Stock not found for product: "
+                    .orElseThrow(() -> new ResourceNotFoundException("Stock not found for product: "
                             + detail.getProductId()));
 
             if (stock.getQuantity() < detail.getQuantity()) {
-                throw new RuntimeException("Insufficient stock for product: "
+                throw new InsufficientStockException("Insufficient stock for product: "
                         + detail.getProductId());
             }
 
@@ -61,7 +63,7 @@ public class SaleServiceImp implements ISaleService {
     @Override
     public SaleResponseDTO getById(Long id) {
         Sale sale = saleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sale not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Sale not found"));
         return saleMapper.toResponseDTO(sale);
     }
 
